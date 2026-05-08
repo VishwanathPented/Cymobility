@@ -161,4 +161,8 @@
   .card {
     padding: 2rem;
   }
+  .cardImageWrapper {
+    width: calc(100% + 4rem);
+    margin: -2rem -2rem 1.5rem -2rem;
+  }
 }
