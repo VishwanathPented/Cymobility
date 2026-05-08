@@ -1,0 +1,368 @@
+/* ── Base ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  padding: 0;
+  background: rgba(11, 15, 25, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.scrolled {
+  background: rgba(11, 15, 25, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Scroll progress bar */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+  z-index: 2;
+}
+
+/* Active nav link */
+.activeLink {
+  color: var(--accent-cyan) !important;
+  background: rgba(0, 210, 255, 0.08) !important;
+}
+
+/* ── Inner layout ── */
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ── Logo ── */
+.logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  width: 160px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: filter 0.35s ease, opacity 0.3s ease;
+}
+
+/* When navbar is white, darken the cyan logo so it's still visible */
+.logoScrolled {
+  /* no filter needed — navbar stays dark */
+}
+
+.logoImg:hover {
+  opacity: 0.85;
+}
+
+/* ── Desktop links ── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-cyan);
+}
+
+/* ── Dropdown ── */
+.dropdownWrapper {
+  position: relative;
+}
+
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 280px;
+  background: var(--bg-white);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  padding: 0.5rem;
+  z-index: 100;
+}
+
+.dropdownItem {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: var(--font-main);
+  line-height: 1.4;
+}
+
+.dropdownItem:hover {
+  background: rgba(0, 86, 255, 0.06);
+  color: var(--primary-blue);
+}
+
+/* ── CTA Buttons ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.loginBtn {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.scrolled .loginBtn {
+  color: var(--text-dark);
+}
+
+.loginBtn:hover {
+  color: var(--accent-cyan);
+}
+
+.scrolled .loginBtn:hover {
+  color: var(--primary-blue);
+}
+
+.ctaBtn {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--bg-white);
+  background: var(--primary-blue);
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  background: var(--primary-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 86, 255, 0.35);
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bg-white);
+  margin-left: auto;
+  padding: 0.25rem;
+}
+
+.scrolled .hamburger {
+  color: var(--text-dark);
+}
+
+/* ── Mobile backdrop ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1001;
+}
+
+/* ── Mobile drawer ── */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 90vw);
+  height: 100dvh;
+  background: var(--bg-white);
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+  overflow-y: auto;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--bg-gray);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+  padding: 0.25rem;
+}
+
+.drawerLinks {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.drawerGroupLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.drawerLink {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: var(--font-main);
+}
+
+.drawerLink:hover {
+  background: rgba(0, 86, 255, 0.06);
+  color: var(--primary-blue);
+}
+
+.drawerDivider {
+  height: 1px;
+  background: var(--bg-gray);
+  margin: 0.75rem 0;
+}
+
+.drawerActions {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--bg-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.drawerContact {
+  text-align: center;
+  padding: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  border: 2px solid var(--bg-gray);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.drawerContact:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.drawerCta {
+  text-align: center;
+  padding: 0.875rem;
+  font-weight: 700;
+  font-family: var(--font-main);
+  color: var(--bg-white);
+  background: var(--primary-blue);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.drawerCta:hover {
+  background: var(--primary-blue-hover);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .links,
+  .actions {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: 0 1.25rem;
+  }
+
+  .logoImg {
+    width: 130px;
+  }
+}
