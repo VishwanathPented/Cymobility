@@ -8,25 +8,25 @@ const steps = [
     icon: <Eye size={24} />,
     title: "Continuous Monitoring",
     description: "Our vSOC ingests telematics, IT, and OT data in real-time, leveraging AI to detect anomalies across millions of connected vehicles.",
-    image: "/service_soc.png",
+    image: `${import.meta.env.BASE_URL}service_soc.png`,
   },
   {
     icon: <SearchCode size={24} />,
     title: "Threat Analysis",
     description: "Advanced analytics and digital twin technology correlate events to accurately identify cyber-attacks, reducing false positives.",
-    image: "/service_pentest.png",
+    image: `${import.meta.env.BASE_URL}service_pentest.png`,
   },
   {
     icon: <ShieldAlert size={24} />,
     title: "Incident Response",
     description: "Automated playbooks and expert analysts provide immediate mitigation strategies to contain and neutralize threats.",
-    image: "/service_vehicle.png",
+    image: `${import.meta.env.BASE_URL}service_vehicle.png`,
   },
   {
     icon: <ClipboardCheck size={24} />,
     title: "Compliance & Auditing",
     description: "Generate automated reports to ensure continuous adherence to UNECE WP.29 R155 and ISO/SAE 21434 standards.",
-    image: "/about_shield.png",
+    image: `${import.meta.env.BASE_URL}about_shield.png`,
   }
 ];
 

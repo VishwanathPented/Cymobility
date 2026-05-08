@@ -6,31 +6,31 @@ import styles from './Services.module.css';
 const servicesList = [
   {
     icon: <Radar size={28} />,
-    image: "/service_soc.png",
+    image: `${import.meta.env.BASE_URL}service_soc.png`,
     title: "Security Monitoring and Incident Response",
     description: "Cloud-based vehicle security operations center providing real-time monitoring and threat intelligence for connected fleets."
   },
   {
     icon: <Crosshair size={28} />,
-    image: "/service_pentest.png",
+    image: `${import.meta.env.BASE_URL}service_pentest.png`,
     title: "Automotive Penetration Testing",
     description: "Rigorous offensive testing on ECUs, infotainment systems, telematics, and V2X communications."
   },
   {
     icon: <FileCheck size={28} />,
-    image: "/service_soc.png",
+    image: `${import.meta.env.BASE_URL}service_soc.png`,
     title: "Compliance & Auditing",
     description: "Ensure adherence to UN R155/R156 and ISO/SAE 21434 standards with comprehensive automated auditing."
   },
   {
     icon: <ShieldAlert size={28} />,
-    image: "/service_vehicle.png",
+    image: `${import.meta.env.BASE_URL}service_vehicle.png`,
     title: "Security Assessment & Risk Analysis",
     description: "Identify and prioritize potential attack vectors early in the development lifecycle to design secure architectures."
   },
   {
     icon: <CarFront size={28} />,
-    image: "/service_vehicle.png",
+    image: `${import.meta.env.BASE_URL}service_vehicle.png`,
     title: "Vehicle Security",
     description: "In-vehicle network protection (CAN, Automotive Ethernet) and secure boot implementation."
   }
