@@ -51,7 +51,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <div className={styles.dashboardMockup}>
-            <img src="/hero_car.png" alt="Connected Car Cybersecurity" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+            <img src={`${import.meta.env.BASE_URL}hero_car.png`} alt="Connected Car Cybersecurity" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             
             {/* Abstract floating elements */}
             <motion.div 

@@ -32,7 +32,7 @@ const Careers = () => {
     <section className={styles.careers} id="careers">
       {/* Hero banner using existing image */}
       <div className={styles.heroBanner}>
-        <img src="/about_shield.png" alt="Careers at CyMobility" className={styles.bannerBg} />
+        <img src={`${import.meta.env.BASE_URL}about_shield.png`} alt="Careers at CyMobility" className={styles.bannerBg} />
         <div className={styles.bannerOverlay}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}

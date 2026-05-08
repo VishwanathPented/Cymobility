@@ -50,7 +50,7 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#" className={styles.logo}>
             <img
-              src="/logos/logo.png"
+              src={`${import.meta.env.BASE_URL}logos/logo.png`}
               alt="CyMobility"
               className={`${styles.logoImg} ${scrolled ? styles.logoScrolled : ''}`}
             />
@@ -124,7 +124,7 @@ const Navbar = () => {
               transition={{ type: 'tween', duration: 0.3 }}
             >
               <div className={styles.drawerHeader}>
-                <img src="/logos/logo1.png" alt="CyMobility" style={{ width: '140px', height: 'auto' }} />
+                <img src={`${import.meta.env.BASE_URL}logos/logo1.png`} alt="CyMobility" style={{ width: '140px', height: 'auto' }} />
                 <button onClick={() => setMobileOpen(false)} className={styles.closeBtn} aria-label="Close menu">
                   <X size={26} />
                 </button>

@@ -71,7 +71,7 @@ const About = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <img 
-            src="/about_shield.png" 
+            src={`${import.meta.env.BASE_URL}about_shield.png`} 
             alt="Automotive Cybersecurity Shield" 
             className={styles.image}
           />

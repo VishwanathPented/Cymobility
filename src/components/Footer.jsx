@@ -9,7 +9,7 @@ const Footer = () => {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <a href="#" className={styles.logo}>
-              <img src="/logos/logo1.png" alt="CyMobility" style={{ width: '200px', height: 'auto' }} />
+              <img src={`${import.meta.env.BASE_URL}logos/logo1.png`} alt="CyMobility" style={{ width: '200px', height: 'auto' }} />
             </a>
             <p className={styles.desc} style={{ fontSize: '0.9rem' }}>
               CyMobility, Ground Floor, PVR TOWERS, 1341, Venkateshwara Nagar Main Road, MCECHS Layout, Dr.Shivaram Karanth Nagar, Jakkuru, Bengaluru, Karnataka 560064
