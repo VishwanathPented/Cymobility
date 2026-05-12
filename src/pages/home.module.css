@@ -622,12 +622,12 @@
 
 .isoBadge {
   background: #fff;
-  border: 2px solid var(--bg-gray);
+  border: 2px solid #e2e8f0;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--text-dark);
+  color: #0a0a2a;
 }
 
 /* === Audit pipeline / terminal section === */
