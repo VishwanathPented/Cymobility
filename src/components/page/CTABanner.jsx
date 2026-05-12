@@ -11,6 +11,7 @@ export default function CTABanner({
 }) {
   return (
     <section className={styles.ctaBanner}>
+      <div className="cyber-grid-dense" />
       <div className="container">
         <div className={styles.ctaInner}>
           <h2 className={styles.ctaTitle}>{title}</h2>

@@ -5,6 +5,7 @@ import styles from './page.module.css';
 export default function PageHero({ eyebrow, title, subtitle, pills, ctas, breadcrumbs }) {
   return (
     <section className={styles.pageHero}>
+      <div className="cyber-grid" />
       <div className="container">
         {breadcrumbs && (
           <nav className={styles.crumbs} aria-label="Breadcrumb">
@@ -20,7 +21,11 @@ export default function PageHero({ eyebrow, title, subtitle, pills, ctas, breadc
             ))}
           </nav>
         )}
-        {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+        {eyebrow && (
+          <p className={`${styles.eyebrow} mono`}>
+            <span className="status-dot" />{eyebrow}
+          </p>
+        )}
         <motion.h1
           className={styles.h1}
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +46,7 @@ export default function PageHero({ eyebrow, title, subtitle, pills, ctas, breadc
         )}
         {pills && pills.length > 0 && (
           <div className={styles.pills}>
-            {pills.map((p) => <span key={p} className={styles.pill}>{p}</span>)}
+            {pills.map((p) => <span key={p} className={`${styles.pill} mono`}>{p}</span>)}
           </div>
         )}
         {ctas && ctas.length > 0 && (

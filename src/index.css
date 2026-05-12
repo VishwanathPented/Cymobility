@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
   /* Brand palette */
@@ -35,6 +35,7 @@
 
   --font-main: 'Verdana', sans-serif;
   --font-heading: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
   --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
   --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
@@ -171,6 +172,68 @@ section {
 .btn-outline-light:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
+}
+
+/* ── Cyber theme utilities ─────────────────────────────────────── */
+
+/* Monospace accent — for regulation codes, version strings, telemetry */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+/* Subtle technical grid overlay for dark sections.
+   Use on a positioned ancestor and rely on its mask to fade at edges. */
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, #000 50%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, #000 50%, transparent 90%);
+  pointer-events: none;
+}
+
+/* Slightly denser variant for the CTA banner */
+.cyber-grid-dense {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(var(--brand-accent-2-rgb), 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--brand-accent-2-rgb), 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Telemetry-style status dot */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-accent-2);
+  box-shadow: 0 0 8px rgba(var(--brand-accent-2-rgb), 0.8);
+  animation: statusPulse 2.4s ease-in-out infinite;
+}
+
+.status-dot[data-status="warn"]  { background: #ffb74d; box-shadow: 0 0 8px rgba(255,183,77,0.7); }
+.status-dot[data-status="alert"] { background: #ff7676; box-shadow: 0 0 8px rgba(255,118,118,0.7); }
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+/* Sweeping scan line — overlays an image or container */
+@keyframes scanSweep {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(120%); opacity: 0; }
 }
 
 /* Scrollbar customization */

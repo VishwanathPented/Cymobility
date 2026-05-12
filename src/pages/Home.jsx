@@ -5,16 +5,77 @@ import {
   TestTube2, AlertTriangle, Radar, BookOpen, Cog
 } from 'lucide-react';
 import Seo, { breadcrumbJsonLd, faqJsonLd } from '../components/Seo.jsx';
-import { Section, H2, Lead, Grid, Card } from '../components/page/Section.jsx';
+import { Section, H2, Grid, Card } from '../components/page/Section.jsx';
 import FAQ from '../components/page/FAQ.jsx';
 import CTABanner from '../components/page/CTABanner.jsx';
 import styles from './home.module.css';
+
+// Attack surface hotspots overlaid on the hero car image.
+// Positions are percentages relative to the heroFrame container so the
+// dots track the image at every viewport size.
+const HOTSPOTS = [
+  { code: 'A1', name: 'TCU',     top: '38%', left: '24%', labelPos: 'left' },
+  { code: 'A2', name: 'Gateway', top: '52%', left: '50%', labelPos: 'right' },
+  { code: 'A3', name: 'IVI',     top: '30%', left: '62%', labelPos: 'right' },
+  { code: 'A4', name: 'ADAS',    top: '64%', left: '32%', labelPos: 'left' },
+  { code: 'A5', name: 'OBD',     top: '76%', left: '70%', labelPos: 'right' },
+  { code: 'A6', name: 'V2X',     top: '20%', left: '46%', labelPos: 'right' },
+];
+
+// Decorative SVG network — pulsing lines + nodes drifting behind the hero.
+const NETWORK_LINES = [
+  { x1: 90,  y1: 120, x2: 320, y2: 260 },
+  { x1: 320, y1: 260, x2: 560, y2: 180 },
+  { x1: 560, y1: 180, x2: 820, y2: 340 },
+  { x1: 820, y1: 340, x2: 1080, y2: 230 },
+  { x1: 200, y1: 540, x2: 460, y2: 660 },
+  { x1: 460, y1: 660, x2: 740, y2: 540 },
+  { x1: 740, y1: 540, x2: 1020, y2: 700 },
+  { x1: 90,  y1: 380, x2: 320, y2: 260 },
+  { x1: 560, y1: 180, x2: 460, y2: 660 },
+];
+
+const NETWORK_NODES = [
+  { cx: 90, cy: 120 }, { cx: 320, cy: 260 }, { cx: 560, cy: 180 },
+  { cx: 820, cy: 340 }, { cx: 1080, cy: 230 }, { cx: 200, cy: 540 },
+  { cx: 460, cy: 660 }, { cx: 740, cy: 540 }, { cx: 1020, cy: 700 },
+  { cx: 90, cy: 380 },
+];
+
+// Live-feeling metrics for the stats strip. The values reinforce
+// the "always-on operations" feel.
+const STATS = [
+  { code: '01', value: '247', suffix: '/day', label: 'THREAT INDICATORS PROCESSED' },
+  { code: '02', value: '12',  suffix: '+',    label: 'OEMS & TIER-1 CLIENTS' },
+  { code: '03', value: '9',   suffix: '',     label: 'REGULATIONS COVERED' },
+  { code: '04', value: '0',   suffix: '',     label: 'INCIDENTS UNREPORTED' },
+  { code: '05', value: '24/7',suffix: '',     label: 'VSOC COVERAGE' },
+];
 
 const LOGOS = [
   'Mahindra', 'Tata Motors', 'TÜV SÜD', 'UNO Minda', 'Spark Minda', 'Devise Electronics',
   'FEV', 'ignitarium', 'Vector', 'Actalent', 'itemis', 'LG', 'Pi Square Technologies',
   'RNTBCI', 'SBD', 'Kalyani', 'AXISCADES', 'Microtech FuSa Solutions', 'OMNEX',
   'Secure Elements', 'TRANCE',
+];
+
+// Terminal block — illustrative compliance verification trace for the homepage.
+// Rendered with monospace styling and a per-line stagger animation.
+const TERMINAL_LINES = (s) => [
+  <><span className={s.termPrompt}>$</span> <span className={s.termCmd}>cymobility</span> verify <span className={s.termFlag}>--regulation</span> un-r155 <span className={s.termFlag}>--target</span> oem-platform-x</>,
+  <span className={s.termDim}>[09:42:18] orchestrator started · session#a3f2c1</span>,
+  '',
+  <><span className={s.termOk}>✓</span> CSMS established        <span className={s.termDim}>ISO/SAE 21434 §5  ·  governance + RACI</span></>,
+  <><span className={s.termOk}>✓</span> TARA documented         <span className={s.termDim}>WP-15-01 → WP-15-08  ·  attack-feasibility rated</span></>,
+  <><span className={s.termOk}>✓</span> Pen-test evidence       <span className={s.termDim}>3 ECUs · gateway · TCU · IVI head-unit</span></>,
+  <><span className={s.termOk}>✓</span> Fuzz campaigns          <span className={s.termDim}>CAN-FD parser · UDS stack · 0 unique crashes</span></>,
+  <><span className={s.termOk}>✓</span> SUMS configured         <span className={s.termDim}>UN R156 §7.2  ·  rollback + signature chain</span></>,
+  <><span className={s.termOk}>✓</span> Supplier evidence       <span className={s.termDim}>14/14 Tier-1 ISO 21434 attestations on file</span></>,
+  <><span className={s.termWarn}>!</span> Continuous monitoring  <span className={s.termDim}>VSOC live · 3 medium CVEs queued for triage</span></>,
+  '',
+  <span className={s.termDim}>────────────────────────────────────────────────────</span>,
+  <><span className={s.termOk}>[ OK ]</span> <span className={s.termHeading}>Vehicle type approval evidence: READY</span></>,
+  <span className={s.termDim}>Submit to KBA / ARAI · expected review window 6–10 weeks</span>,
 ];
 
 const FAQS = [
@@ -44,6 +105,7 @@ export default function Home() {
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroBg} />
+        <div className="cyber-grid" />
         <div className={`container ${styles.heroInner}`}>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -51,7 +113,9 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className={styles.heroLeft}
           >
-            <p className={styles.heroEyebrow}>Automotive Cybersecurity · India + Global</p>
+            <p className={`${styles.heroEyebrow} mono`}>
+              <span className="status-dot" /> AUTOMOTIVE.CYBERSECURITY · INDIA + GLOBAL
+            </p>
             <h1 className={styles.heroTitle}>
               Secure Every Vehicle.<br />
               <span className="text-gradient">Comply With Every Regulation.</span>
@@ -63,7 +127,7 @@ export default function Home() {
             </p>
             <div className={styles.heroPills}>
               {['UN R155/R156', 'EU CRA', 'ISO/SAE 21434', 'AIS-189/190', 'TISAX', 'SOTIF'].map((p) => (
-                <span key={p} className={styles.heroPill}>{p}</span>
+                <span key={p} className={`${styles.heroPill} mono`}>{p}</span>
               ))}
             </div>
             <div className={styles.heroCtas}>
@@ -80,22 +144,100 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15 }}
           >
-            <img src="/hero_car.png" alt="Connected vehicle cybersecurity — CyMobility India" className={styles.heroImg} />
+            <div className={styles.heroFrame}>
+              <span className={`${styles.cornerBracket} ${styles.cornerTL}`} />
+              <span className={`${styles.cornerBracket} ${styles.cornerTR}`} />
+              <span className={`${styles.cornerBracket} ${styles.cornerBL}`} />
+              <span className={`${styles.cornerBracket} ${styles.cornerBR}`} />
+
+              {/* Frame label */}
+              <div className={styles.frameLabel}>
+                <span className="status-dot" />
+                <span className={`mono ${styles.frameLabelText}`}>ATTACK SURFACE MAP · oem-platform-x</span>
+              </div>
+
+              <img src="/hero_car.png" alt="Connected vehicle cybersecurity — CyMobility India" className={styles.heroImg} />
+
+              {/* Pulsing hotspots over attack surfaces */}
+              {HOTSPOTS.map((h, i) => (
+                <div
+                  key={h.code}
+                  className={styles.hotspot}
+                  style={{ top: h.top, left: h.left, animationDelay: `${i * 0.3}s` }}
+                >
+                  <span className={styles.hotspotRing} />
+                  <span className={styles.hotspotDot} />
+                  <span className={`mono ${styles.hotspotLabel}`} data-pos={h.labelPos}>
+                    <span className={styles.hotspotCode}>{h.code}</span>{h.name}
+                  </span>
+                </div>
+              ))}
+
+              <div className={styles.scanLine} />
+            </div>
             <motion.div
               className={styles.heroChip1}
               animate={{ y: [-8, 8, -8] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <Shield size={14} /> CSMS Approved
+              <span className="status-dot" data-status="ok" />
+              <span className={styles.chipLabel}>csms.status</span>
+              <span className={styles.chipValue}>APPROVED</span>
             </motion.div>
             <motion.div
               className={styles.heroChip2}
               animate={{ y: [8, -8, 8] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <AlertTriangle size={14} /> Critical CVE Detected
+              <span className="status-dot" data-status="warn" />
+              <span className={styles.chipLabel}>cve.feed</span>
+              <span className={styles.chipValue}>CVE-2026-1421</span>
             </motion.div>
           </motion.div>
+        </div>
+
+        {/* Animated background SVG network — pulsing connection lines */}
+        <svg className={styles.heroNetwork} aria-hidden="true" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="netLine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="rgba(85,221,221,0)" />
+              <stop offset="50%" stopColor="rgba(85,221,221,0.45)" />
+              <stop offset="100%" stopColor="rgba(85,221,221,0)" />
+            </linearGradient>
+          </defs>
+          {NETWORK_LINES.map((l, i) => (
+            <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+              stroke="url(#netLine)" strokeWidth="1"
+              style={{ animationDelay: `${i * 0.4}s` }}
+              className={styles.netLine}
+            />
+          ))}
+          {NETWORK_NODES.map((n, i) => (
+            <circle key={i} cx={n.cx} cy={n.cy} r="2"
+              fill="rgba(170,238,238,0.7)"
+              style={{ animationDelay: `${i * 0.2}s` }}
+              className={styles.netNode}
+            />
+          ))}
+        </svg>
+      </section>
+
+      {/* Stats dashboard — live-feeling metrics strip */}
+      <section className={styles.statsStrip}>
+        <div className="cyber-grid-dense" />
+        <div className="container">
+          <div className={styles.statsGrid}>
+            {STATS.map((s) => (
+              <div key={s.label} className={styles.statCell}>
+                <div className={styles.statTop}>
+                  <span className="status-dot" />
+                  <span className={`mono ${styles.statCode}`}>{s.code}</span>
+                </div>
+                <div className={styles.statValue}>{s.value}<span className={styles.statSuffix}>{s.suffix}</span></div>
+                <div className={`mono ${styles.statLabel}`}>{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -114,8 +256,8 @@ export default function Home() {
       </section>
 
       {/* Regulatory urgency */}
-      <Section>
-        <H2 align="center" eyebrow="Regulatory urgency">
+      <Section dark>
+        <H2 align="center" eyebrow="Regulatory urgency" code="01">
           The Regulatory Deadline Is Here. Is Your Product Ready?
         </H2>
         <Grid cols={3}>
@@ -143,13 +285,11 @@ export default function Home() {
 
       {/* What we secure */}
       <Section alt>
-        <H2 align="center" eyebrow="What we secure">Every Attack Surface. Fully Covered.</H2>
-        <Lead>
-          <p style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 2rem' }}>
-            Modern vehicles and connected devices are as software-defined as they are mechanical.
-            CyMobility secures every layer — from silicon to cloud.
-          </p>
-        </Lead>
+        <H2 align="center" eyebrow="What we secure" code="02">Every Attack Surface. Fully Covered.</H2>
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: 720, margin: '0 auto 2rem', lineHeight: 1.6 }}>
+          Modern vehicles and connected devices are as software-defined as they are mechanical.
+          CyMobility secures every layer — from silicon to cloud.
+        </p>
         <div className={styles.assetGrid}>
           {[
             ['Vehicle Platforms', <Shield size={20} />],
@@ -169,8 +309,8 @@ export default function Home() {
       </Section>
 
       {/* Who we serve */}
-      <Section>
-        <H2 align="center" eyebrow="Who we serve">
+      <Section dark>
+        <H2 align="center" eyebrow="Who we serve" code="03">
           Built for Every Player in the Automotive Value Chain
         </H2>
         <Grid cols={3}>
@@ -208,7 +348,7 @@ export default function Home() {
 
       {/* Services grid */}
       <Section alt>
-        <H2 align="center" eyebrow="What we do">
+        <H2 align="center" eyebrow="What we do" code="04">
           End-to-End Automotive Cybersecurity — Testing, Compliance, Monitoring
         </H2>
         <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: 700, margin: '0 auto 2rem' }}>
@@ -242,8 +382,8 @@ export default function Home() {
       </Section>
 
       {/* Platform teaser */}
-      <Section>
-        <H2 align="center" eyebrow="security.core platform">
+      <Section dark>
+        <H2 align="center" eyebrow="security.core platform" code="05">
           One Platform. Four Engines. Full Cybersecurity Lifecycle.
         </H2>
         <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: 760, margin: '0 auto 2rem' }}>
@@ -251,24 +391,69 @@ export default function Home() {
           Purpose-built to test, detect, monitor, and respond. All from a single dashboard.
         </p>
         <Grid cols={4}>
-          <Card title="pentest.core" to="/platform/pentest-core">
+          <Card title={<><span className="mono">pentest</span>.core</>} to="/platform/pentest-core">
             AI-powered automated pen testing for hardware and embedded systems. SSH deployment, output capture, pass/fail analysis, AI-generated compliance reports.
           </Card>
-          <Card title="fuzz.core" to="/platform/fuzz-core">
+          <Card title={<><span className="mono">fuzz</span>.core</>} to="/platform/fuzz-core">
             Uncovers crashes, memory leaks, and security weaknesses before production. Coverage-guided fuzzing and grammar-aware mutation.
           </Card>
-          <Card title="threat.core" to="/platform/threat-core">
+          <Card title={<><span className="mono">threat</span>.core</>} to="/platform/threat-core">
             Real-time collection, analysis and visualisation of cybersecurity threats. OSINT processing and actionable intelligence dashboards.
           </Card>
-          <Card title="vulnerability.core" to="/platform/vulnerability-core">
+          <Card title={<><span className="mono">vulnerability</span>.core</>} to="/platform/vulnerability-core">
             Automated SBOM/HBOM-based scanner. Continuously monitors components for known vulnerabilities. EU CRA-aligned reporting.
           </Card>
         </Grid>
       </Section>
 
+      {/* Audit pipeline — terminal demonstration */}
+      <section className={styles.terminalSection}>
+        <div className="cyber-grid-dense" />
+        <div className="container">
+          <div className={styles.terminalIntro}>
+            <p className={`${styles.termEyebrow} mono`}><span className="status-dot" /> AUDIT.PIPELINE</p>
+            <h2 className={styles.termTitle}>From TARA to type approval — one verified pipeline</h2>
+            <p className={styles.termLead}>
+              Every CyMobility engagement produces auditable, machine-checkable evidence. Below: a
+              representative trace of the compliance verification our team and the security.core
+              platform run before every UN R155 submission.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.terminal}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className={styles.terminalBar}>
+              <span className={styles.terminalDot} data-dot="r" />
+              <span className={styles.terminalDot} data-dot="y" />
+              <span className={styles.terminalDot} data-dot="g" />
+              <span className={styles.terminalTitle}>cymobility — verify oem-platform-x — un-r155</span>
+            </div>
+            <div className={styles.terminalBody}>
+              {TERMINAL_LINES(styles).map((line, i) => (
+                <motion.div
+                  key={i}
+                  className={styles.termLine}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.25, delay: 0.15 + i * 0.06 }}
+                >
+                  {line || ' '}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <Section alt>
-        <H2 align="center">Trusted by Teams That Can't Afford to Get It Wrong</H2>
+        <H2 align="center" eyebrow="Client trust" code="06">Trusted by Teams That Can't Afford to Get It Wrong</H2>
         <Grid cols={2}>
           <blockquote className={styles.quote}>
             <p>"CyMobility helped us navigate the UN R155 compliance requirements with a level of technical depth and regulatory precision we hadn't found elsewhere. Their in-house testing capability and ISO 21434 expertise made a direct difference to our type approval timeline."</p>
@@ -282,8 +467,8 @@ export default function Home() {
       </Section>
 
       {/* Why CyMobility */}
-      <Section>
-        <H2 align="center" eyebrow="Why CyMobility">What Makes CyMobility Different</H2>
+      <Section dark>
+        <H2 align="center" eyebrow="Why CyMobility" code="07">What Makes CyMobility Different</H2>
         <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: 720, margin: '0 auto 2rem' }}>
           We don't just advise — we test, certify, monitor, and stand beside you through every compliance milestone.
         </p>

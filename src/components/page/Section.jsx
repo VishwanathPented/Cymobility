@@ -1,17 +1,29 @@
 import styles from './page.module.css';
 
-export function Section({ children, alt = false, narrow = false, id }) {
+export function Section({ children, alt = false, dark = false, narrow = false, id, grid = false }) {
+  const cls = [
+    styles.section,
+    alt && styles.sectionAlt,
+    dark && styles.sectionDark,
+  ].filter(Boolean).join(' ');
   return (
-    <section id={id} className={`${styles.section} ${alt ? styles.sectionAlt : ''}`}>
+    <section id={id} className={cls}>
+      {(dark || grid) && <div className="cyber-grid" />}
       <div className={narrow ? styles.containerNarrow : 'container'}>{children}</div>
     </section>
   );
 }
 
-export function H2({ children, eyebrow, align = 'left' }) {
+export function H2({ children, eyebrow, code, align = 'left' }) {
   return (
     <header className={`${styles.h2Block} ${align === 'center' ? styles.h2Center : ''}`}>
-      {eyebrow && <p className={styles.h2Eyebrow}>{eyebrow}</p>}
+      {eyebrow && (
+        <p className={`${styles.h2Eyebrow} mono`}>
+          {code && <span className={styles.h2Code}>[{code}]</span>}
+          <span className="status-dot" />
+          {eyebrow}
+        </p>
+      )}
       <h2 className={styles.h2}>{children}</h2>
     </header>
   );

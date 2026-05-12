@@ -1,24 +1,86 @@
-/* ── Base ── */
-.navbar {
+/* ── Top status ticker ── */
+.ticker {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: 26px;
+  background: linear-gradient(90deg, #000028 0%, var(--brand-bg) 50%, #000028 100%);
+  border-bottom: 1px solid rgba(var(--brand-accent-2-rgb), 0.25);
+  overflow: hidden;
+  z-index: 1001;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(var(--brand-accent-3-rgb), 0.78);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.tickerTrack {
+  display: flex;
+  animation: tickerScroll 65s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.tickerGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.8rem;
+  padding-right: 1.8rem;
+}
+
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.tickerItem strong {
+  color: var(--brand-accent-2);
+  font-weight: 600;
+}
+
+.tickerSep {
+  color: rgba(var(--brand-accent-2-rgb), 0.35);
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .ticker { display: none; }
+}
+
+/* ── Base ── */
+.navbar {
+  position: fixed;
+  top: 26px;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  transition: background 0.35s ease, box-shadow 0.35s ease;
+  transition: background 0.35s ease, box-shadow 0.35s ease, top 0.35s ease;
   padding: 0;
-  background: rgba(11, 15, 25, 0.3);
+  background: rgba(0, 0, 30, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(var(--brand-accent-2-rgb), 0.15);
+}
+
+@media (max-width: 640px) {
+  .navbar { top: 0; }
 }
 
 .scrolled {
-  background: rgba(11, 15, 25, 0.7);
+  background: rgba(0, 0, 30, 0.75);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(var(--brand-accent-2-rgb), 0.22);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35),
+              0 1px 0 rgba(var(--brand-accent-2-rgb), 0.15);
 }
 
 /* Scroll progress bar */
@@ -64,11 +126,6 @@
   display: block;
   object-fit: contain;
   transition: filter 0.35s ease, opacity 0.3s ease;
-}
-
-/* When navbar is white, darken the cyan logo so it's still visible */
-.logoScrolled {
-  /* no filter needed — navbar stays dark */
 }
 
 .logoImg:hover {
@@ -273,15 +330,26 @@
 
 .ctaBtn {
   font-family: var(--font-main);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
+  letter-spacing: 0.3px;
   color: var(--bg-white);
   background: var(--primary-blue);
-  padding: 0.6rem 1.4rem;
-  border-radius: 8px;
+  padding: 0.6rem 1.3rem;
+  border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
   white-space: nowrap;
+  position: relative;
+}
+
+.ctaBtn::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 7px;
+  border: 1px solid rgba(var(--brand-accent-2-rgb), 0.45);
+  pointer-events: none;
 }
 
 .ctaBtn:hover {
