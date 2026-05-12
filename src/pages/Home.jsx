@@ -156,7 +156,7 @@ export default function Home() {
                 <span className={`mono ${styles.frameLabelText}`}>ATTACK SURFACE MAP · oem-platform-x</span>
               </div>
 
-              <img src="/hero_car.png" alt="Connected vehicle cybersecurity — CyMobility India" className={styles.heroImg} />
+              <img src={`${import.meta.env.BASE_URL}hero_car.png`} alt="Connected vehicle cybersecurity — CyMobility India" className={styles.heroImg} />
 
               {/* Pulsing hotspots over attack surfaces */}
               {HOTSPOTS.map((h, i) => (

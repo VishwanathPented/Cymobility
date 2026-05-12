@@ -10,7 +10,7 @@ const root = resolve(__dirname, '..');
 // Inline copy of routes — the source-of-truth /src/routes.js exports the same list.
 const { routes } = await import(pathToFileURL(resolve(root, 'src/routes.js')).href);
 
-const SITE = 'https://cymobility.com';
+const SITE = 'https://vishwanathpented.github.io/Cymobility';
 const today = new Date().toISOString().slice(0, 10);
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

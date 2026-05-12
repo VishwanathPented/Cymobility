@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cymobility.com/sitemap.xml
+Sitemap: https://vishwanathpented.github.io/Cymobility/sitemap.xml

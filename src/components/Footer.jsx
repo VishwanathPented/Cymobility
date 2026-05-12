@@ -51,7 +51,7 @@ export default function Footer() {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <Link to="/" className={styles.logo}>
-              <img src="/logos/logo1.png" alt="CyMobility" style={{ width: '200px', height: 'auto' }} />
+              <img src={`${import.meta.env.BASE_URL}logos/logo1.png`} alt="CyMobility" style={{ width: '200px', height: 'auto' }} />
             </Link>
             <p className={styles.desc}>
               Ground Floor, PVR Towers, 1341, Venkateshwara Nagar Main Road,

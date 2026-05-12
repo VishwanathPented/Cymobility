@@ -127,7 +127,7 @@ export default function Navbar() {
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.inner}>
           <Link to="/" className={styles.logo}>
-            <img src="/logos/logo.png" alt="CyMobility" className={styles.logoImg} />
+            <img src={`${import.meta.env.BASE_URL}logos/logo.png`} alt="CyMobility" className={styles.logoImg} />
           </Link>
 
           <div className={styles.links}>
@@ -194,7 +194,7 @@ export default function Navbar() {
               transition={{ type: 'tween', duration: 0.3 }}
             >
               <div className={styles.drawerHeader}>
-                <img src="/logos/logo1.png" alt="CyMobility" style={{ width: '140px' }} />
+                <img src={`${import.meta.env.BASE_URL}logos/logo1.png`} alt="CyMobility" style={{ width: '140px' }} />
                 <button onClick={() => setMobileOpen(false)} className={styles.closeBtn} aria-label="Close menu">
                   <X size={26} />
                 </button>

@@ -80,7 +80,7 @@ const meta = {
   '/compliance-assessment/': { title: 'Request a Compliance Assessment | UN R155, EU CRA, AIS-189 | CyMobility', description: 'Request an automotive cybersecurity compliance gap assessment. UN R155, EU CRA, AIS-189, ISO 21434. Senior consultant response within 1 business day.' },
 };
 
-const SITE = 'https://cymobility.com';
+const SITE = 'https://vishwanathpented.github.io/Cymobility';
 
 function buildHtml(route) {
   const m = meta[route] || meta['/'];

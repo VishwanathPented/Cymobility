@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE = 'https://cymobility.com';
+const SITE = 'https://vishwanathpented.github.io/Cymobility';
 
 export default function Seo({
   title,
