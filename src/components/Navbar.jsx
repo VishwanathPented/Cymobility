@@ -103,27 +103,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top status ticker — feels like a live security monitoring strip */}
-      <div className={styles.ticker} aria-hidden="true">
-        <div className={styles.tickerTrack}>
-          {[...Array(2)].map((_, dup) => (
-            <div key={dup} className={styles.tickerGroup}>
-              <span className={styles.tickerItem}><span className="status-dot" /> VSOC.STATUS: <strong>OPERATIONAL</strong></span>
-              <span className={styles.tickerSep}>//</span>
-              <span className={styles.tickerItem}>THREAT.FEED: <strong>247 indicators / 24h</strong></span>
-              <span className={styles.tickerSep}>//</span>
-              <span className={styles.tickerItem}>UN R155 / EU CRA / AIS-189 / ISO 21434</span>
-              <span className={styles.tickerSep}>//</span>
-              <span className={styles.tickerItem}><span className="status-dot" data-status="warn" /> CVE-2026-1421 — TRIAGING</span>
-              <span className={styles.tickerSep}>//</span>
-              <span className={styles.tickerItem}>LAB: BLR-01 / <strong>ONLINE</strong></span>
-              <span className={styles.tickerSep}>//</span>
-              <span className={styles.tickerItem}>EU CRA ENFORCEMENT IN <strong>T-578 DAYS</strong></span>
-              <span className={styles.tickerSep}>//</span>
-            </div>
-          ))}
-        </div>
-      </div>
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.inner}>
           <Link to="/" className={styles.logo}>

@@ -1,81 +1,16 @@
-/* ── Top status ticker ── */
-.ticker {
+/* ── Base ── */
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 26px;
-  background: linear-gradient(90deg, #000028 0%, var(--brand-bg) 50%, #000028 100%);
-  border-bottom: 1px solid rgba(var(--brand-accent-2-rgb), 0.25);
-  overflow: hidden;
-  z-index: 1001;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: rgba(var(--brand-accent-3-rgb), 0.78);
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-}
-
-.tickerTrack {
-  display: flex;
-  animation: tickerScroll 90s linear infinite;
-  white-space: nowrap;
-  will-change: transform;
-}
-
-.ticker:hover .tickerTrack {
-  animation-play-state: paused;
-}
-
-.tickerGroup {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.8rem;
-  padding-right: 1.8rem;
-}
-
-.tickerItem {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.tickerItem strong {
-  color: var(--brand-accent-2);
-  font-weight: 600;
-}
-
-.tickerSep {
-  color: rgba(var(--brand-accent-2-rgb), 0.35);
-}
-
-@keyframes tickerScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (max-width: 640px) {
-  .ticker { display: none; }
-}
-
-/* ── Base ── */
-.navbar {
-  position: fixed;
-  top: 26px;
-  left: 0;
-  right: 0;
   z-index: 1000;
-  transition: background 0.35s ease, box-shadow 0.35s ease, top 0.35s ease;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
   padding: 0;
   background: rgba(0, 0, 30, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(var(--brand-accent-2-rgb), 0.15);
-}
-
-@media (max-width: 640px) {
-  .navbar { top: 0; }
 }
 
 .scrolled {
