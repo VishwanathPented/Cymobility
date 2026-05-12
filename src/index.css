@@ -1,30 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-blue: #0056FF;
-  --primary-blue-hover: #0046d1;
-  
-  --navy-dark: #0B0F19;
-  --navy-light: #1A2235;
-  
+  /* Brand palette */
+  --brand-bg: #00003b;        /* Background — deep navy */
+  --brand-fg: #ffffff;        /* Foreground */
+  --brand-accent-1: #00cccc;  /* Primary accent (teal) */
+  --brand-accent-2: #55dddd;  /* Secondary accent (lighter teal) */
+  --brand-accent-3: #aaeeee;  /* Tertiary accent (mint) */
+
+  /* RGB channels for rgba() compositions */
+  --brand-bg-rgb: 0, 0, 59;
+  --brand-accent-1-rgb: 0, 204, 204;
+  --brand-accent-2-rgb: 85, 221, 221;
+  --brand-accent-3-rgb: 170, 238, 238;
+
+  /* Semantic aliases (kept for backwards compatibility with the existing
+     component CSS — same names, new values). */
+  --primary-blue: var(--brand-accent-1);
+  --primary-blue-hover: #00a8a8;
+
+  --navy-dark: var(--brand-bg);
+  --navy-light: #1a1a5c;
+
   --bg-white: #FFFFFF;
-  --bg-light: #F8F9FA;
-  --bg-gray: #E9ECEF;
-  
-  --text-dark: #1A1A1A;
+  --bg-light: #F4F7FA;
+  --bg-gray: #E4EAF0;
+
+  --text-dark: #0a0a2a;
   --text-muted: #4A5568;
   --text-light: #FFFFFF;
 
-  --accent-cyan: #00D2FF;
-  --accent-purple: #7B61FF;
+  --accent-cyan: var(--brand-accent-2);
+  --accent-purple: var(--brand-accent-3);
 
   --font-main: 'Verdana', sans-serif;
   --font-heading: 'Inter', sans-serif;
-  
+
   --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
   --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 86, 255, 0.1), 0 10px 10px -5px rgba(0, 86, 255, 0.04);
-  --shadow-glow: 0 0 20px rgba(0, 210, 255, 0.4);
+  --shadow-lg: 0 20px 25px -5px rgba(var(--brand-accent-1-rgb), 0.14), 0 10px 10px -5px rgba(var(--brand-accent-1-rgb), 0.06);
+  --shadow-glow: 0 0 20px rgba(var(--brand-accent-2-rgb), 0.45);
 }
 
 * {
@@ -133,7 +148,7 @@ section {
 .btn-primary:hover {
   background: var(--primary-blue-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 86, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--brand-accent-1-rgb), 0.35);
 }
 
 .btn-outline {
@@ -143,7 +158,7 @@ section {
 }
 
 .btn-outline:hover {
-  background: rgba(0, 86, 255, 0.05);
+  background: rgba(var(--brand-accent-1-rgb), 0.08);
   transform: translateY(-2px);
 }
 

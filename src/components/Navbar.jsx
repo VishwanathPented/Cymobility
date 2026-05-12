@@ -1,150 +1,211 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navbar.module.css';
 
-const solutions = [
-  { name: 'Automotive Penetration Testing', href: '#services' },
-  { name: 'Security Assessment & Risk Analysis', href: '#services' },
-  { name: 'Security Monitoring & Incident Response', href: '#services' },
-  { name: 'Compliance & Auditing', href: '#services' },
-  { name: 'Vehicle Security', href: '#services' },
-];
+const MENUS = {
+  Services: [
+    {
+      heading: 'Compliance',
+      items: [
+        { name: 'Regulatory Compliance', to: '/services/regulatory-compliance' },
+        { name: 'UN R155 / R156', to: '/services/regulatory-compliance/un-r155-r156' },
+        { name: 'EU CRA', to: '/services/regulatory-compliance/eu-cra' },
+        { name: 'AIS-189 / AIS-190', to: '/services/regulatory-compliance/ais-189-ais-190' },
+      ],
+    },
+    {
+      heading: 'Testing & Risk',
+      items: [
+        { name: 'Security Testing', to: '/services/security-testing' },
+        { name: 'Penetration Testing', to: '/services/security-testing/penetration-testing' },
+        { name: 'Fuzz Testing', to: '/services/security-testing/fuzz-testing' },
+        { name: 'TARA', to: '/services/security-testing/tara' },
+      ],
+    },
+    {
+      heading: 'Operations & Advisory',
+      items: [
+        { name: 'Threat Intelligence & VSOC', to: '/services/threat-intelligence-vsoc' },
+        { name: 'SDV Security Advisory', to: '/services/sdv-security-advisory' },
+        { name: 'Workshops & Training', to: '/services/security-workshops-training' },
+        { name: 'Cybersecurity Consulting', to: '/services/automotive-cybersecurity-consulting' },
+      ],
+    },
+  ],
+  Platform: [
+    {
+      heading: 'security.core',
+      items: [
+        { name: 'Platform Overview', to: '/platform' },
+        { name: 'pentest.core', to: '/platform/pentest-core' },
+        { name: 'fuzz.core', to: '/platform/fuzz-core' },
+        { name: 'threat.core', to: '/platform/threat-core' },
+        { name: 'vulnerability.core', to: '/platform/vulnerability-core' },
+      ],
+    },
+  ],
+  Industries: [
+    {
+      heading: 'Sectors',
+      items: [
+        { name: 'Automotive OEMs', to: '/industries/automotive-oems' },
+        { name: 'Tier-1 & Tier-2 Suppliers', to: '/industries/tier-1-tier-2-suppliers' },
+        { name: 'Connected Devices & IoT', to: '/industries/connected-devices-iot' },
+      ],
+    },
+  ],
+  Resources: [
+    {
+      heading: 'Insights',
+      items: [
+        { name: 'Blog', to: '/blog' },
+        { name: 'Compliance Guides', to: '/compliance-guides' },
+        { name: 'Case Studies', to: '/case-studies' },
+        { name: 'Glossary', to: '/glossary' },
+      ],
+    },
+  ],
+  About: [
+    {
+      heading: 'Company',
+      items: [
+        { name: 'About CyMobility', to: '/about' },
+        { name: 'Team', to: '/about/team' },
+        { name: 'Certifications & Partnerships', to: '/about/certifications-partnerships' },
+        { name: 'Contact', to: '/contact' },
+      ],
+    },
+  ],
+};
 
-const Navbar = () => {
+const TOP_LINKS = Object.keys(MENUS);
+
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(null); // desktop hover dropdown
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [expanded, setExpanded] = useState(null); // mobile accordion
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(scrollTop > 60);
-      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
-
-      // Active section detection
-      const sections = ['home', 'about', 'services', 'process', 'careers', 'contact'];
-      for (const id of [...sections].reverse()) {
-        const el = document.getElementById(id);
-        if (el && scrollTop >= el.offsetTop - 120) {
-          setActiveSection(id);
-          break;
-        }
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setOpen(null);
+    setExpanded(null);
+  }, [location.pathname]);
 
   return (
     <>
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-        {/* Scroll Progress Bar */}
-        <div className={styles.progressBar} style={{ width: `${scrollProgress}%` }} />
-
         <div className={styles.inner}>
+          <Link to="/" className={styles.logo}>
+            <img src="/logos/logo.png" alt="CyMobility" className={styles.logoImg} />
+          </Link>
 
-          {/* Logo */}
-          <a href="#" className={styles.logo}>
-            <img
-              src={`${import.meta.env.BASE_URL}logos/logo.png`}
-              alt="CyMobility"
-              className={`${styles.logoImg} ${scrolled ? styles.logoScrolled : ''}`}
-            />
-          </a>
-
-          {/* Desktop Nav Links */}
           <div className={styles.links}>
-            {/* Solutions dropdown */}
-            <div
-              className={styles.dropdownWrapper}
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
-            >
-              <button className={`${styles.link} ${styles.dropdownTrigger} ${activeSection === 'services' ? styles.activeLink : ''}`}>
-                Solutions <ChevronDown size={14} className={`${styles.chevron} ${dropdownOpen ? styles.chevronOpen : ''}`} />
-              </button>
-              <AnimatePresence>
-                {dropdownOpen && (
-                  <motion.div
-                    className={styles.dropdown}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.18 }}
-                  >
-                    {solutions.map((s) => (
-                      <a key={s.name} href={s.href} className={styles.dropdownItem}>
-                        {s.name}
-                      </a>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <a href="#about" className={`${styles.link} ${activeSection === 'about' ? styles.activeLink : ''}`}>About</a>
-            <a href="#process" className={`${styles.link} ${activeSection === 'process' ? styles.activeLink : ''}`}>How It Works</a>
-            <a href="#careers" className={`${styles.link} ${activeSection === 'careers' ? styles.activeLink : ''}`}>Careers</a>
-            <a href="#contact" className={`${styles.link} ${activeSection === 'contact' ? styles.activeLink : ''}`}>Blogs</a>
+            {TOP_LINKS.map((label) => (
+              <div
+                key={label}
+                className={styles.dropdownWrapper}
+                onMouseEnter={() => setOpen(label)}
+                onMouseLeave={() => setOpen(null)}
+              >
+                <button className={`${styles.link} ${styles.dropdownTrigger}`} aria-expanded={open === label}>
+                  {label} <ChevronDown size={14} className={`${styles.chevron} ${open === label ? styles.chevronOpen : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {open === label && (
+                    <motion.div
+                      className={styles.megaPanel}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <div className={styles.megaGrid}>
+                        {MENUS[label].map((col) => (
+                          <div key={col.heading} className={styles.megaCol}>
+                            <p className={styles.megaHeading}>{col.heading}</p>
+                            {col.items.map((it) => (
+                              <Link key={it.to} to={it.to} className={styles.megaItem}>
+                                {it.name}
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
 
-          {/* CTA Buttons */}
           <div className={styles.actions}>
-            <a href="#contact" className={styles.loginBtn}>Contact Us</a>
-            <a href="#contact" className={styles.ctaBtn}>Request Demo</a>
+            <NavLink to="/contact" className={styles.loginBtn}>Contact</NavLink>
+            <NavLink to="/compliance-assessment" className={styles.ctaBtn}>Request Assessment</NavLink>
           </div>
 
-          {/* Mobile Hamburger */}
           <button className={styles.hamburger} onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu size={26} />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
             <motion.div
               className={styles.backdrop}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
               className={styles.drawer}
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
             >
               <div className={styles.drawerHeader}>
-                <img src={`${import.meta.env.BASE_URL}logos/logo1.png`} alt="CyMobility" style={{ width: '140px', height: 'auto' }} />
+                <img src="/logos/logo1.png" alt="CyMobility" style={{ width: '140px' }} />
                 <button onClick={() => setMobileOpen(false)} className={styles.closeBtn} aria-label="Close menu">
                   <X size={26} />
                 </button>
               </div>
               <div className={styles.drawerLinks}>
-                <p className={styles.drawerGroupLabel}>Solutions</p>
-                {solutions.map((s) => (
-                  <a key={s.name} href={s.href} className={styles.drawerLink} onClick={() => setMobileOpen(false)}>
-                    {s.name}
-                  </a>
+                {TOP_LINKS.map((label) => (
+                  <div key={label} className={styles.drawerGroup}>
+                    <button
+                      className={styles.drawerGroupBtn}
+                      onClick={() => setExpanded(expanded === label ? null : label)}
+                    >
+                      {label}
+                      <ChevronRight
+                        size={16}
+                        style={{ transform: expanded === label ? 'rotate(90deg)' : 'none', transition: 'transform .2s' }}
+                      />
+                    </button>
+                    {expanded === label && (
+                      <div className={styles.drawerSub}>
+                        {MENUS[label].flatMap((c) => c.items).map((it) => (
+                          <Link key={it.to} to={it.to} className={styles.drawerLink}>
+                            {it.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
-                <div className={styles.drawerDivider} />
-                <a href="#about" className={styles.drawerLink} onClick={() => setMobileOpen(false)}>About</a>
-                <a href="#process" className={styles.drawerLink} onClick={() => setMobileOpen(false)}>How It Works</a>
-                <a href="#careers" className={styles.drawerLink} onClick={() => setMobileOpen(false)}>Careers</a>
-                <a href="#contact" className={styles.drawerLink} onClick={() => setMobileOpen(false)}>Blogs</a>
               </div>
               <div className={styles.drawerActions}>
-                <a href="#contact" className={styles.drawerContact} onClick={() => setMobileOpen(false)}>Contact Us</a>
-                <a href="#contact" className={styles.drawerCta} onClick={() => setMobileOpen(false)}>Request Demo</a>
+                <Link to="/contact" className={styles.drawerContact}>Contact</Link>
+                <Link to="/compliance-assessment" className={styles.drawerCta}>Request Assessment</Link>
               </div>
             </motion.div>
           </>
@@ -152,6 +213,4 @@ const Navbar = () => {
       </AnimatePresence>
     </>
   );
-};
-
-export default Navbar;
+}

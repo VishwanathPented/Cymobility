@@ -7,9 +7,18 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 2.5rem;
   margin-bottom: 4rem;
+}
+
+.contactLine {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .brand {
@@ -103,6 +112,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.875rem;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {

@@ -36,7 +36,7 @@
 /* Active nav link */
 .activeLink {
   color: var(--accent-cyan) !important;
-  background: rgba(0, 210, 255, 0.08) !important;
+  background: rgba(var(--brand-accent-2-rgb), 0.08) !important;
 }
 
 /* ── Inner layout ── */
@@ -152,8 +152,91 @@
 }
 
 .dropdownItem:hover {
-  background: rgba(0, 86, 255, 0.06);
+  background: rgba(var(--brand-accent-1-rgb), 0.06);
   color: var(--primary-blue);
+}
+
+/* ── Mega menu ── */
+.megaPanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-white);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+  padding: 1.25rem;
+  z-index: 100;
+  min-width: 320px;
+}
+
+.megaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.megaCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.megaHeading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  padding: 0 0.6rem;
+}
+
+.megaItem {
+  display: block;
+  padding: 0.55rem 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease;
+  font-family: var(--font-main);
+  line-height: 1.35;
+}
+
+.megaItem:hover {
+  background: rgba(var(--brand-accent-1-rgb), 0.07);
+  color: var(--primary-blue);
+}
+
+/* Mobile drawer accordion group */
+.drawerGroup {
+  border-bottom: 1px solid var(--bg-gray);
+}
+
+.drawerGroupBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.9rem 0.9rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: left;
+}
+
+.drawerSub {
+  padding: 0 0.4rem 0.6rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 /* ── CTA Buttons ── */
@@ -204,7 +287,7 @@
 .ctaBtn:hover {
   background: var(--primary-blue-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 86, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(var(--brand-accent-1-rgb), 0.35);
 }
 
 /* ── Hamburger ── */
@@ -290,7 +373,7 @@
 }
 
 .drawerLink:hover {
-  background: rgba(0, 86, 255, 0.06);
+  background: rgba(var(--brand-accent-1-rgb), 0.06);
   color: var(--primary-blue);
 }
 

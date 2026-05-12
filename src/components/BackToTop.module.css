@@ -13,10 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 86, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(var(--brand-accent-1-rgb), 0.4);
   transition: box-shadow 0.3s ease;
 }
 
 .btn:hover {
-  box-shadow: 0 8px 28px rgba(0, 86, 255, 0.6);
+  box-shadow: 0 8px 28px rgba(var(--brand-accent-1-rgb), 0.6);
 }
