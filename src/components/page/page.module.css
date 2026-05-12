@@ -297,6 +297,13 @@
   width: 100%;
   margin: 1.5rem 0;
   font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .prose table { font-size: 0.82rem; }
 }
 
 .prose th, .prose td {
@@ -321,13 +328,23 @@
 .grid[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
 .grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
 .grid[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+.grid[data-cols="5"] { grid-template-columns: repeat(5, 1fr); }
+
+@media (max-width: 1100px) {
+  .grid[data-cols="5"] { grid-template-columns: repeat(3, 1fr); }
+}
 
 @media (max-width: 960px) {
-  .grid[data-cols="3"], .grid[data-cols="4"] { grid-template-columns: repeat(2, 1fr); }
+  .grid[data-cols="3"],
+  .grid[data-cols="4"],
+  .grid[data-cols="5"] { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
-  .grid[data-cols="2"], .grid[data-cols="3"], .grid[data-cols="4"] {
+  .grid[data-cols="2"],
+  .grid[data-cols="3"],
+  .grid[data-cols="4"],
+  .grid[data-cols="5"] {
     grid-template-columns: 1fr;
   }
 }
@@ -436,6 +453,19 @@
 .cardLink:hover .cardArrow {
   opacity: 1;
   transform: translateX(3px);
+}
+
+/* Touch devices don't have hover — show the link arrow always so users
+   can see cards are tappable, and skip the scan-line animation. */
+@media (hover: none) {
+  .card::before { display: none; }
+  .cardArrow { opacity: 0.6; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 1.2rem; border-radius: 12px; }
+  .cardTitle { font-size: 1rem; }
+  .cardBody { font-size: 0.9rem; }
 }
 
 /* === FAQ === */
@@ -583,5 +613,16 @@
 
 /* === Responsive page hero === */
 @media (max-width: 768px) {
-  .pageHero { padding: 7rem 0 3rem; }
+  .pageHero { padding: 6.5rem 0 2.5rem; }
+  .section { padding: 3.5rem 0; }
+  .h2Block { margin-bottom: 1.6rem; }
+  .heroCtas { width: 100%; }
+  .btnPrimary, .btnGhost { flex: 1; justify-content: center; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .pageHero { padding: 5.5rem 0 2rem; }
+  .crumbs { font-size: 0.75rem; }
+  .pill { font-size: 0.66rem; padding: 0.28rem 0.6rem; }
+  .h2Eyebrow { font-size: 0.64rem; letter-spacing: 1.8px; padding: 0.28rem 0.6rem; }
 }

@@ -230,6 +230,8 @@
 
 @media (max-width: 768px) {
   .hotspotLabel { display: none; }
+  .hotspot { width: 10px; height: 10px; }
+  .hotspotDot { width: 6px; height: 6px; }
 }
 
 .heroImg {
@@ -448,11 +450,25 @@
     gap: 2rem;
   }
   .heroVisual { order: -1; }
-  .heroChip1, .heroChip2 { display: none; }
+  /* Pull the chips inside the frame instead of hiding them — keep the
+     telemetry vibe on tablets but stop them overflowing the viewport. */
+  .heroChip1 { right: 8px; top: 8px; font-size: 0.62rem; padding: 0.4rem 0.6rem; }
+  .heroChip2 { left: 8px; bottom: 8px; font-size: 0.62rem; padding: 0.4rem 0.6rem; }
 }
 
 @media (max-width: 640px) {
-  .hero { padding: 7rem 0 3rem; }
+  .hero { padding: 6rem 0 2.5rem; }
+  .heroFrame { border-radius: 12px; }
+  .cornerBracket { width: 12px; height: 12px; }
+  .cornerTL, .cornerTR { top: 6px; }
+  .cornerBL, .cornerBR { bottom: 6px; }
+  .cornerTL, .cornerBL { left: 6px; }
+  .cornerTR, .cornerBR { right: 6px; }
+  /* Hide telemetry chips on the smallest screens — the car image is
+     too small to host them legibly. The attack-surface dots still
+     pulse to keep the cyber feel. */
+  .heroChip1, .heroChip2 { display: none; }
+  .frameLabel { font-size: 0.55rem; padding: 0.22rem 0.5rem; }
 }
 
 /* === Trust bar === */

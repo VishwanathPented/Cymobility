@@ -24,7 +24,7 @@ export default function ComplianceAssessment() {
       />
 
       <Section>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '3rem', alignItems: 'start' }}>
+        <div className="split-2 split-2--lead-left">
           <div>
             <H2 eyebrow="The form">Tell us about your engagement</H2>
             <Prose>

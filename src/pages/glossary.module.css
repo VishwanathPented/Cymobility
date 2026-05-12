@@ -5,14 +5,19 @@
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--bg-gray);
+  position: sticky;
+  top: 88px;
+  background: var(--bg-light);
+  padding-top: 0.5rem;
+  z-index: 5;
 }
 
 .indexLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 34px;
-  height: 34px;
+  min-width: 38px;
+  height: 38px;
   border: 1px solid var(--bg-gray);
   border-radius: 6px;
   background: #fff;
@@ -21,6 +26,19 @@
   color: var(--primary-blue);
   text-decoration: none;
   padding: 0 0.5rem;
+  touch-action: manipulation;
+}
+
+@media (max-width: 480px) {
+  .indexBar {
+    top: 56px;
+    gap: 0.3rem;
+  }
+  .indexLink {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.78rem;
+  }
 }
 
 .indexLink:hover {

@@ -51,7 +51,7 @@ export default function Contact() {
       />
 
       <Section>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '3rem', alignItems: 'start' }} className="contactRow">
+        <div className="split-2 split-2--lead-right">
           <div>
             <H2 eyebrow="Reach us directly">Headquarters — Bengaluru</H2>
             <Prose>
