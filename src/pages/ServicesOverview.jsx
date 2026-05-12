@@ -1,4 +1,4 @@
-import Seo, { breadcrumbJsonLd } from '../components/Seo.jsx';
+import Seo, { breadcrumbJsonLd, serviceJsonLd } from '../components/Seo.jsx';
 import PageHero from '../components/page/PageHero.jsx';
 import { Section, H2, Prose, Grid, Card } from '../components/page/Section.jsx';
 import CTABanner from '../components/page/CTABanner.jsx';
@@ -10,10 +10,17 @@ export default function ServicesOverview() {
         title="Automotive Cybersecurity Services India | CyMobility"
         description="Complete automotive cybersecurity services — penetration testing, regulatory compliance, TARA, VSOC, SDV advisory. UN R155, EU CRA, AIS-189, ISO 21434 expertise."
         path="/services/"
-        jsonLd={breadcrumbJsonLd([
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services/' },
-        ])}
+        jsonLd={[
+          breadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services/' },
+          ]),
+          serviceJsonLd({
+            name: 'Automotive Cybersecurity Services',
+            description: 'End-to-end automotive cybersecurity — consulting, regulatory compliance (UN R155, EU CRA, AIS-189, ISO 21434), security testing, TARA, VSOC, SDV advisory, and training.',
+            path: '/services/',
+          }),
+        ]}
       />
       <PageHero
         eyebrow="Services"
