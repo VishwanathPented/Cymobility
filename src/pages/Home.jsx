@@ -175,24 +175,16 @@ export default function Home() {
 
               <div className={styles.scanLine} />
             </div>
-            <motion.div
-              className={styles.heroChip1}
-              animate={{ y: [-8, 8, -8] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            <div className={styles.heroChip1}>
               <span className="status-dot" data-status="ok" />
               <span className={styles.chipLabel}>csms.status</span>
               <span className={styles.chipValue}>APPROVED</span>
-            </motion.div>
-            <motion.div
-              className={styles.heroChip2}
-              animate={{ y: [8, -8, 8] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            </div>
+            <div className={styles.heroChip2}>
               <span className="status-dot" data-status="warn" />
               <span className={styles.chipLabel}>cve.feed</span>
               <span className={styles.chipValue}>CVE-2026-1421</span>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 

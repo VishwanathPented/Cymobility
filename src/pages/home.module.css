@@ -153,12 +153,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 0, 30, 0.85);
+  background: #00001f;
   border: 1px solid rgba(var(--brand-accent-2-rgb), 0.35);
   padding: 0.3rem 0.7rem;
   border-radius: 4px;
   z-index: 5;
-  backdrop-filter: blur(6px);
 }
 
 .frameLabelText {
@@ -207,7 +206,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 30, 0.85);
+  background: #00001f;
   border: 1px solid rgba(var(--brand-accent-2-rgb), 0.35);
   color: var(--brand-accent-3);
   padding: 0.18rem 0.5rem;
@@ -216,7 +215,6 @@
   font-weight: 600;
   letter-spacing: 0.5px;
   white-space: nowrap;
-  backdrop-filter: blur(6px);
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -277,7 +275,7 @@
 /* Telemetry chips */
 .heroChip1, .heroChip2 {
   position: absolute;
-  background: rgba(0, 0, 30, 0.88);
+  background: #00001f;
   border: 1px solid rgba(var(--brand-accent-2-rgb), 0.35);
   color: var(--brand-accent-3);
   padding: 0.55rem 0.85rem;
@@ -288,14 +286,28 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  backdrop-filter: blur(8px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.5),
               inset 0 0 0 1px rgba(var(--brand-accent-2-rgb), 0.08);
   z-index: 4;
 }
 
-.heroChip1 { top: 6%; right: -4%; }
-.heroChip2 { bottom: 8%; left: -4%; }
+.heroChip1 {
+  top: 6%;
+  right: -4%;
+  animation: chipFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+.heroChip2 {
+  bottom: 8%;
+  left: -4%;
+  animation: chipFloat 6s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(-6px); }
+  50%      { transform: translateY(6px); }
+}
 
 /* SVG network animation behind hero */
 .heroNetwork {
@@ -308,9 +320,15 @@
   z-index: 1;
 }
 
+/* Only flow every second line — halves the active animations.
+   Plain stroke-dashoffset on a few SVG <line>s is cheap; the
+   skipped ones render as static dashed strokes. */
 .netLine {
   stroke-dasharray: 8 12;
-  animation: netLineFlow 6s linear infinite;
+}
+.netLine:nth-child(odd) {
+  animation: netLineFlow 8s linear infinite;
+  will-change: stroke-dashoffset;
 }
 
 @keyframes netLineFlow {
@@ -318,13 +336,15 @@
   to   { stroke-dashoffset: -200; }
 }
 
+/* Animate opacity only (cheap) — drop the `r` animation which forces
+   SVG to re-rasterise the circle every frame. */
 .netNode {
-  animation: netNodePulse 3s ease-in-out infinite;
+  animation: netNodePulse 4s ease-in-out infinite;
 }
 
 @keyframes netNodePulse {
-  0%, 100% { opacity: 0.3; r: 1.5; }
-  50%      { opacity: 1; r: 3; }
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
 }
 
 /* === Stats dashboard strip === */
@@ -462,8 +482,13 @@
 .trustTrack {
   display: flex;
   gap: 3rem;
-  animation: trustScroll 40s linear infinite;
+  animation: trustScroll 50s linear infinite;
   width: max-content;
+  will-change: transform;
+}
+
+.trustMarquee:hover .trustTrack {
+  animation-play-state: paused;
 }
 
 @keyframes trustScroll {

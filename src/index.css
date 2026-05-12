@@ -236,6 +236,23 @@ section {
   100% { transform: translateY(120%); opacity: 0; }
 }
 
+/* ── Reduced motion support ──────────────────────────────────────
+   Users with the OS-level "reduce motion" preference get a much
+   calmer experience: infinite animations are stilled, transitions
+   are kept short. Improves accessibility AND CPU usage on weaker
+   machines (some browsers expose this automatically on battery). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .status-dot { animation: none; opacity: 1; }
+}
+
 /* Scrollbar customization */
 ::-webkit-scrollbar {
   width: 8px;

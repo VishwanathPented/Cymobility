@@ -19,9 +19,13 @@
 
 .tickerTrack {
   display: flex;
-  animation: tickerScroll 65s linear infinite;
+  animation: tickerScroll 90s linear infinite;
   white-space: nowrap;
   will-change: transform;
+}
+
+.ticker:hover .tickerTrack {
+  animation-play-state: paused;
 }
 
 .tickerGroup {
