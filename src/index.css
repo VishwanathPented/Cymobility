@@ -17,30 +17,30 @@
   /* Semantic aliases (kept for backwards compatibility with the existing
      component CSS — same names, new values). */
   --primary-blue: var(--brand-accent-1);
-  --primary-blue-hover: #00a8a8;
+  --primary-blue-hover: #00e6e6;
 
   --navy-dark: var(--brand-bg);
-  --navy-light: #1a1a5c;
+  --navy-light: #00004e;
 
-  --bg-white: #FFFFFF;
-  --bg-light: #F4F7FA;
-  --bg-gray: #E4EAF0;
+  --bg-white: #00003b;
+  --bg-light: #00004d;
+  --bg-gray: rgba(85, 221, 221, 0.15);
 
-  --text-dark: #0a0a2a;
-  --text-muted: #4A5568;
-  --text-light: #FFFFFF;
+  --text-dark: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --text-light: #ffffff;
 
   --accent-cyan: var(--brand-accent-2);
   --accent-purple: var(--brand-accent-3);
 
-  --font-main: 'Verdana', sans-serif;
+  --font-main: 'Inter', sans-serif;
   --font-heading: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
-  --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-  --shadow-lg: 0 20px 25px -5px rgba(var(--brand-accent-1-rgb), 0.14), 0 10px 10px -5px rgba(var(--brand-accent-1-rgb), 0.06);
-  --shadow-glow: 0 0 20px rgba(var(--brand-accent-2-rgb), 0.45);
+  --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.2), 0 2px 4px -1px rgba(0,0,0,0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.15);
+  --shadow-lg: 0 20px 25px -5px rgba(var(--brand-accent-1-rgb), 0.25), 0 10px 10px -5px rgba(var(--brand-accent-1-rgb), 0.1);
+  --shadow-glow: 0 0 20px rgba(var(--brand-accent-2-rgb), 0.3);
 }
 
 * {
@@ -51,7 +51,7 @@
 
 body {
   background-color: var(--bg-white);
-  color: var(--text-dark);
+  color: var(--text-muted);
   font-family: var(--font-main);
   line-height: 1.6;
   overflow-x: hidden;
@@ -59,7 +59,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-main);
+  font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-dark);
@@ -283,14 +283,14 @@ section {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-light);
+  background: var(--brand-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
+  background: rgba(85, 221, 221, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-blue);
+  background: var(--brand-accent-2);
 }

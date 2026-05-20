@@ -322,6 +322,12 @@
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  .heroNetwork {
+    display: none !important;
+  }
+}
+
 /* Only flow every second line — halves the active animations.
    Plain stroke-dashoffset on a few SVG <line>s is cheap; the
    skipped ones render as static dashed strokes. */
@@ -534,8 +540,8 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: #fff;
-  border: 1px solid var(--bg-gray);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(85, 221, 221, 0.15);
   border-radius: 10px;
   padding: 0.9rem 1rem;
   font-size: 0.9rem;
@@ -547,8 +553,8 @@
 .assetItem svg { color: var(--primary-blue); }
 
 .assetItem:hover {
-  border-color: rgba(var(--brand-accent-1-rgb),0.3);
-  background: rgba(var(--brand-accent-1-rgb),0.03);
+  border-color: rgba(0, 204, 204, 0.45);
+  background: rgba(0, 204, 204, 0.08);
 }
 
 /* === Regulation strip === */
@@ -587,12 +593,15 @@
 
 /* === Testimonial quote === */
 .quote {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.03);
   border-left: 4px solid var(--primary-blue);
+  border-top: 1px solid rgba(85, 221, 221, 0.08);
+  border-right: 1px solid rgba(85, 221, 221, 0.08);
+  border-bottom: 1px solid rgba(85, 221, 221, 0.08);
   border-radius: 0 12px 12px 0;
   padding: 1.8rem 2rem;
   margin: 0;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
 
 .quote p {
@@ -621,13 +630,13 @@
 }
 
 .isoBadge {
-  background: #fff;
-  border: 2px solid var(--bg-gray);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(85, 221, 221, 0.2);
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--text-dark);
+  color: var(--brand-accent-2);
 }
 
 /* === Audit pipeline / terminal section === */

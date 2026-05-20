@@ -1,12 +1,14 @@
 .form {
-  background: #fff;
-  border: 1px solid var(--bg-gray);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(85, 221, 221, 0.15);
   border-radius: 14px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 28px rgba(0, 0, 59, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .row {
@@ -44,10 +46,10 @@
   font-family: var(--font-main);
   font-size: 0.95rem;
   padding: 0.7rem 0.85rem;
-  border: 1px solid var(--bg-gray);
+  border: 1px solid rgba(85, 221, 221, 0.22);
   border-radius: 8px;
-  background: #fff;
-  color: var(--text-dark);
+  background: rgba(0, 0, 59, 0.5);
+  color: #ffffff;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -55,12 +57,12 @@
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 0 3px rgba(var(--brand-accent-1-rgb), 0.12);
+  border-color: var(--brand-accent-2);
+  box-shadow: 0 0 0 3px rgba(85, 221, 221, 0.15);
 }
 
 .checkGroup {
-  border: 1px solid var(--bg-gray);
+  border: 1px solid rgba(85, 221, 221, 0.15);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -93,7 +95,7 @@
 
 .submit {
   background: var(--primary-blue);
-  color: #fff;
+  color: #00003b;
   font-family: var(--font-main);
   font-size: 1rem;
   font-weight: 700;
@@ -113,9 +115,9 @@
 .submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .err {
-  background: #fff5f5;
-  border: 1px solid #fdcaca;
-  color: #b32525;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fda4af;
   padding: 0.8rem;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -123,8 +125,8 @@
 }
 
 .success {
-  background: #f0fbf4;
-  border: 1px solid #c4ead2;
+  background: rgba(0, 204, 204, 0.08);
+  border: 1px solid rgba(0, 204, 204, 0.3);
   padding: 2rem;
   border-radius: 14px;
   color: var(--text-dark);

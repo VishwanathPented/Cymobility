@@ -179,20 +179,7 @@
 .sectionDark .prose table th { background: rgba(var(--brand-accent-2-rgb), 0.08); color: var(--brand-accent-3); border-color: rgba(var(--brand-accent-2-rgb), 0.18); }
 .sectionDark .prose td { color: rgba(255,255,255,0.78); border-color: rgba(var(--brand-accent-2-rgb), 0.12); }
 
-/* Glassmorphic cards inside dark sections */
-.sectionDark .card {
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(var(--brand-accent-2-rgb), 0.18);
-  backdrop-filter: blur(8px);
-}
-
-.sectionDark .card:hover {
-  background: rgba(var(--brand-accent-2-rgb), 0.06);
-  border-color: rgba(var(--brand-accent-2-rgb), 0.45);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45),
-              0 0 30px rgba(var(--brand-accent-1-rgb), 0.18);
-}
-
+/* Glassmorphic cards inside dark sections are styled globally now */
 .sectionDark .cardTitle { color: var(--brand-fg); }
 .sectionDark .cardBody { color: rgba(255,255,255,0.72); }
 .sectionDark .cardIcon {
@@ -351,8 +338,10 @@
 
 .card {
   position: relative;
-  background: #fff;
-  border: 1px solid var(--bg-gray);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(85, 221, 221, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 14px;
   padding: 1.6rem;
   transition: all 0.25s ease;
@@ -383,8 +372,10 @@
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 59, 0.10);
-  border-color: rgba(var(--brand-accent-1-rgb), 0.35);
+  background: rgba(85, 221, 221, 0.06);
+  border-color: rgba(85, 221, 221, 0.45);
+  box-shadow: 0 12px 28px rgba(0, 0, 59, 0.45),
+              0 0 20px rgba(0, 204, 204, 0.15);
 }
 
 .card:hover::before {
@@ -476,9 +467,11 @@
 }
 
 .faqItem {
-  border: 1px solid var(--bg-gray);
+  border: 1px solid rgba(85, 221, 221, 0.15);
   border-radius: 10px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
 }
 

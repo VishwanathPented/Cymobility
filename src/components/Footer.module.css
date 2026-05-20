@@ -1,6 +1,6 @@
 .footer {
   background: var(--navy-dark);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(85, 221, 221, 0.15);
   padding: 5rem 0 2rem;
   color: var(--text-light);
 }
@@ -97,19 +97,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--bg-white);
+  color: var(--brand-fg);
   transition: all 0.3s ease;
 }
 
 .socialIcon:hover {
   background: var(--primary-blue);
+  color: #00003b;
   transform: translateY(-2px);
 }
 
 .bottom {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(85, 221, 221, 0.15);
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.875rem;
 }
